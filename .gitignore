@@ -6,13 +6,12 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Build outputs
-dist/
-build/
+
 coverage/
 *.tsbuildinfo
 
 # Environment variables
-.env
+
 
 
 # OS / editor junk
