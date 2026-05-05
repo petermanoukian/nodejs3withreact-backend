@@ -1,11 +1,11 @@
 // src/config/database.ts
 import "./env";
 import { createPool } from "mysql2/promise";
-import { config } from "./index";
-import fs from "fs";
-import path from "path";
+import { config } from "./index"; 
 
 
+console.log("✅ DB_CA_CERT loaded:", !!process.env.DB_CA_CERT ? "YES" : "NO");
+console.log("CA Length:", process.env.DB_CA_CERT?.length || 0); 
 
 const pool = createPool({
   host: config.db.host,
@@ -20,11 +20,9 @@ const pool = createPool({
 
   ssl: {
     ca: process.env.DB_CA_CERT!,
-    rejectUnauthorized: true,
     minVersion: 'TLSv1.2'
   },
 });
 
-console.log("✅ DB_CA_CERT loaded:", !!process.env.DB_CA_CERT ? "YES" : "NO");
-console.log("CA Length:", process.env.DB_CA_CERT?.length || 0);
+
 export default pool;
