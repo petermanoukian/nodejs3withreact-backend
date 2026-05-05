@@ -12,6 +12,13 @@ const pool = createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+
+  ssl: {
+    rejectUnauthorized: true,     // Important for security
+  },
+
+
 });
+
 
 export default pool;
