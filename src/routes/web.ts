@@ -4,7 +4,7 @@ const router = Router();
 
 // Example: homepage route
 router.get("/", (req, res) => {
-  res.send("NodeJS backend Updated !");
+  res.send("Node JS Backend for React Front End - Online Version");
 });
 
 
