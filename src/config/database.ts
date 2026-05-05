@@ -5,7 +5,7 @@ import { config } from "./index";
 import fs from "fs";
 import path from "path";
 
-const caPath = path.join(__dirname, "isrgrootx1.pem");  // ← Correct relative path// adjust path if needed
+
 
 const pool = createPool({
   host: config.db.host,
@@ -19,7 +19,7 @@ const pool = createPool({
   queueLimit: 0,
 
   ssl: {
-    ca: fs.readFileSync(caPath),
+    ca: process.env.DB_CA_CERT!,
     rejectUnauthorized: true,
   },
 });
