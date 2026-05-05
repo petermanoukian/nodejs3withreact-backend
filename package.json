@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "dev": "ts-node -r tsconfig-paths/register src/app.ts",
-    "build": "tsc && tsc-alias",
+    "build": "tsc && tsc-alias && copyfiles -u 1 \"src/config/*.pem\" dist/config",
     "migrate": "knex --knexfile src/config/knexfile.ts migrate:latest",
     "rollback": "knex --knexfile src/config/knexfile.ts migrate:rollback",
     "seed": "ts-node -r tsconfig-paths/register src/database/Seeder/index.ts",
@@ -26,6 +26,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.1.0",
     "@types/node": "^25.5.2",
+    "copyfiles": "^2.4.1",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",

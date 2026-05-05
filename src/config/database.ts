@@ -5,7 +5,7 @@ import { config } from "./index";
 import fs from "fs";
 import path from "path";
 
-const caPath = path.join(__dirname, "isrgrootx1.pem");   // ← Correct relative path// adjust path if needed
+const caPath = path.join(__dirname, "isrgrootx1.pem");  // ← Correct relative path// adjust path if needed
 
 const pool = createPool({
   host: config.db.host,
