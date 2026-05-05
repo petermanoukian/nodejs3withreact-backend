@@ -19,7 +19,7 @@ const pool = createPool({
   queueLimit: 0,
 
   ssl: {
-    //ca: process.env.DB_CA_CERT!,
+    ca: process.env.DB_CA_CERT!.replace(/\\n/g, '\n'),
     rejectUnauthorized: true,
     minVersion: 'TLSv1.2'
   },
