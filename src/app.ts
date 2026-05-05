@@ -9,7 +9,7 @@ import path from "path";
 
 const app = express();
 app.use(express.static(path.resolve("public")));
-const PORT = 3000;
+const PORT = process.env.PORT ?? 3000;
 
 // Middleware
 // Allow requests from your React dev server
@@ -30,5 +30,5 @@ app.use(session({
 registerRoutes(app);
 
 app.listen(PORT, () => {
-  console.log(`🚀 From API, Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
