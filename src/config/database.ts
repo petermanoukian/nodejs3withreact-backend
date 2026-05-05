@@ -21,7 +21,10 @@ const pool = createPool({
   ssl: {
     ca: process.env.DB_CA_CERT!,
     rejectUnauthorized: true,
+    minVersion: 'TLSv1.2'
   },
 });
 
+console.log("✅ DB_CA_CERT loaded:", !!process.env.DB_CA_CERT ? "YES" : "NO");
+console.log("CA Length:", process.env.DB_CA_CERT?.length || 0);
 export default pool;
