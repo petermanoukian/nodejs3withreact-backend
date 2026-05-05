@@ -1,4 +1,5 @@
 {
+  //tsconfig.json
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
 
@@ -14,24 +15,25 @@
     "typeRoots": ["./src/types", "./node_modules/@types"],
 
     "paths": {
-      "@config/*": ["config/*"],
-      "@Model/*": ["app/Model/*"],
-      "@Repository/*": ["app/Repository/*"],
-      "@RepositoryInterface/*": ["app/Repository/Interface/*"],
-      "@RepositoryQueries/*": ["app/Repository/Queries/*"],
-      "@Service/*": ["app/Service/*"],
-      "@ServiceInterface/*": ["app/Service/Interface/*"],
-      "@ServiceAction/*": ["app/Service/Action/*"],
-      "@Http/*": ["app/http/*"],
-      "@HttpControllers/*": ["app/http/Controllers/*"],
-      "@HttpMiddleware/*": ["app/http/Middleware/*"],
-      "@HttpRequest/*": ["/app/http/Request/*"]
+      "@config/*": ["./src/config/*"],
+      "@Model/*": ["./src/app/Model/*"],
+      "@Repository/*": ["./src/app/Repository/*"],
+      "@RepositoryInterface/*": ["./src/app/Repository/Interface/*"],
+      "@RepositoryQueries/*": ["./src/app/Repository/Queries/*"],
+      "@Service/*": ["./src/app/Service/*"],
+      "@ServiceInterface/*": ["./src/app/Service/Interface/*"],
+      "@ServiceAction/*": ["./src/app/Service/Action/*"],
+      "@Http/*": ["./src/app/http/*"],
+      "@HttpControllers/*": ["./src/app/http/Controllers/*"],
+      "@HttpMiddleware/*": ["./src/app/http/Middleware/*"],
+      "@HttpRequest/*": ["./src/app/http/Request/*"]
     },
 
 
 
-    "module": "nodenext", 
-    "target": "esnext",
+    "module": "commonjs",
+    "target": "es2020", 
+    "moduleResolution": "node", 
     "types": ["node", "express", "express-session", "multer"],
 
     // For nodejs:
@@ -58,7 +60,6 @@
 
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
     "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
