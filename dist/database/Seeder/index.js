@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const UserSeeder_1 = require("./UserSeeder");
+import { UserSeeder } from "./UserSeeder";
 async function runSeeders() {
     try {
-        await UserSeeder_1.UserSeeder.run();
+        await UserSeeder.run();
         console.log("✅ All seeders executed successfully");
         process.exit(0);
     }

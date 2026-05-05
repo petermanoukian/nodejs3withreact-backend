@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatQuery = void 0;
-const queryHelper_1 = require("../../Helpers/queryHelper");
-class CatQuery {
+import { runQuery, runQueryOne, runQueryPaginated, runQueryReturning, runQueryDelete } from "@Repository/Helpers/queryHelper";
+export class CatQuery {
     db;
     constructor(db) {
         this.db = db;
@@ -13,18 +10,18 @@ class CatQuery {
             query = query.where(key, value); // ✅ reassign
         });
         query = query.orderBy(orderByField, orderByDirection); // ✅ reassign
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnManyPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], page = 1, pageSize = 10) {
         let query = this.db("cat").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
         // ✅ use helper
-        return (0, queryHelper_1.runQueryPaginated)(query, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(query, page, pageSize, orderByField, orderByDirection);
     }
     // add this method inside the CatQuery class
     async returnManyPaginatedWithCounts(filters = {}, orderByField = "id", orderByDirection = "desc", page = 1, pageSize = 10) {
         // get paginated cats first
-        const result = await (0, queryHelper_1.runQueryPaginated)(this.db("cat").select("*"), page, pageSize, orderByField, orderByDirection);
+        const result = await runQueryPaginated(this.db("cat").select("*"), page, pageSize, orderByField, orderByDirection);
         if (result.data.length === 0) {
             return { data: [], total: 0 };
         }
@@ -160,14 +157,14 @@ class CatQuery {
         let query = this.db("cat").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
         // ✅ use helper
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnOneById(id, relatedTables = [], fields = ["*"]) {
         const query = this.db("cat")
             .select(fields)
             .where("id", id);
         // ✅ use helper
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnSearchMany(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like") {
         let query = this.db("cat").select(fields);
@@ -189,7 +186,7 @@ class CatQuery {
         }
         query.orderBy(orderByField, orderByDirection);
         // ✅ use helper
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnSearchPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like", page = 1, pageSize = 10) {
         const baseQuery = this.db("cat").select(fields);
@@ -210,7 +207,7 @@ class CatQuery {
             });
         }
         // ✅ use helper
-        return (0, queryHelper_1.runQueryPaginated)(baseQuery, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(baseQuery, page, pageSize, orderByField, orderByDirection);
     }
     async returnSearchOne(filters = {}, relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like") {
         const query = this.db("cat").select(fields);
@@ -232,11 +229,11 @@ class CatQuery {
         }
         query.orderBy("id", "desc");
         // ✅ use helper
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async store(data) {
         // ✅ helper now returns a single Cat, not an array
-        return await (0, queryHelper_1.runQueryReturning)(this.db("cat").insert(data));
+        return await runQueryReturning(this.db("cat").insert(data));
     }
     /*
     async update(id: number, data: Partial<Cat>) {
@@ -266,11 +263,11 @@ class CatQuery {
             .select("id");
         const subcatIds = subcats.map((s) => s.id);
         if (subcatIds.length > 0) {
-            await (0, queryHelper_1.runQueryDelete)(this.db("prod").whereIn("subcatid", subcatIds));
+            await runQueryDelete(this.db("prod").whereIn("subcatid", subcatIds));
         }
-        await (0, queryHelper_1.runQueryDelete)(this.db("prod").where("catid", id));
-        await (0, queryHelper_1.runQueryDelete)(this.db("subcat").where("catid", id));
-        await (0, queryHelper_1.runQueryDelete)(this.db("cat").where("id", id));
+        await runQueryDelete(this.db("prod").where("catid", id));
+        await runQueryDelete(this.db("subcat").where("catid", id));
+        await runQueryDelete(this.db("cat").where("id", id));
     }
     async deleteMany(ids) {
         // get subcatids before deleting
@@ -280,19 +277,18 @@ class CatQuery {
         const subcatIds = subcats.map((s) => s.id);
         // delete prods by catid
         if (ids.length > 0) {
-            await (0, queryHelper_1.runQueryDelete)(this.db("prod").whereIn("catid", ids));
+            await runQueryDelete(this.db("prod").whereIn("catid", ids));
         }
         // delete prods by subcatid (in case subcatid differs from catid)
         if (subcatIds.length > 0) {
-            await (0, queryHelper_1.runQueryDelete)(this.db("prod").whereIn("subcatid", subcatIds));
+            await runQueryDelete(this.db("prod").whereIn("subcatid", subcatIds));
         }
         // delete subcats
         if (ids.length > 0) {
-            await (0, queryHelper_1.runQueryDelete)(this.db("subcat").whereIn("catid", ids));
+            await runQueryDelete(this.db("subcat").whereIn("catid", ids));
         }
         // delete cats
-        await (0, queryHelper_1.runQueryDelete)(this.db("cat").whereIn("id", ids));
+        await runQueryDelete(this.db("cat").whereIn("id", ids));
     }
 }
-exports.CatQuery = CatQuery;
 //# sourceMappingURL=CatQuery.js.map

@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { ProdService } from "../../../Service/Action/Admin/ProdService";
+import { ProdService } from "@Service/Action/Admin/ProdService";
 export declare class ProdStoreRequest {
     static validate(req: Request, prodService: ProdService): Promise<{
         valid: boolean;

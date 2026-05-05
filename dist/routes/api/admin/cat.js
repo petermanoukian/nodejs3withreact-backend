@@ -1,11 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // src/routes/api/admin/cat.ts
-const express_1 = require("express");
-const CatController_1 = require("../../../app/http/Controllers/Api/Admin/CatController");
+import { Router } from "express";
+import { CatController } from "@Http/Controllers/Api/Admin/CatController";
 // ✅ use the config you already have
-const router = (0, express_1.Router)();
-const catController = CatController_1.CatController.instance;
+const router = Router();
+const catController = CatController.instance;
 // ✅ Explicit routes
 router.get("/list", (req, res) => catController.index(req, res));
 router.post("/list", (req, res) => catController.index(req, res));
@@ -22,11 +20,11 @@ router.post("/edit/:id", (req, res) => catController.edit(req, res));
 router.post("/check-name-add", (req, res) => catController.checkNameExistsForAdd(req, res));
 router.post("/check-name-update", (req, res) => catController.checkNameExistsForUpdate(req, res));
 // cat.ts
-router.post("/store", CatController_1.CatController.uploadMiddleware, // 👈 add this
+router.post("/store", CatController.uploadMiddleware, // 👈 add this
 (req, res) => catController.store(req, res));
-router.put("/update/:id", CatController_1.CatController.uploadMiddleware, // 👈 add this
+router.put("/update/:id", CatController.uploadMiddleware, // 👈 add this
 (req, res) => catController.update(req, res));
 router.delete("/delete/:id", (req, res) => catController.delete(req, res));
 router.delete("/delete-many", (req, res) => catController.deleteMany(req, res));
-exports.default = router;
+export default router;
 //# sourceMappingURL=cat.js.map

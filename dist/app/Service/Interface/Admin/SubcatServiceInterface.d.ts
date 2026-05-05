@@ -1,5 +1,5 @@
-import { Subcat } from "../../../Model/Admin/Subcat.model";
-import { SubcatWithCounts } from "../../../Repository/Interface/Admin/SubcatInterface";
+import { Subcat } from "@Model/Admin/Subcat.model";
+import { SubcatWithCounts } from "@Repository/Interface/Admin/SubcatInterface";
 export interface SubcatServiceInterface {
     returnMany(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[]): Promise<Subcat[]>;
     returnManyPaginated(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[], page?: number, pageSize?: number): Promise<{

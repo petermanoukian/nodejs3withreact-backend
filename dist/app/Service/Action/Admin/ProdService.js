@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProdService = void 0;
-class ProdService {
+export class ProdService {
     repository;
     constructor(repository) {
         this.repository = repository;
@@ -43,5 +40,4 @@ class ProdService {
         return this.repository.deleteMany(...args);
     }
 }
-exports.ProdService = ProdService;
 //# sourceMappingURL=ProdService.js.map

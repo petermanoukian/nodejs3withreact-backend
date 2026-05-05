@@ -1,4 +1,4 @@
-import { Prod } from "../../../Model/Admin/Prod.model";
+import { Prod } from "@Model/Admin/Prod.model";
 export interface ProdServiceInterface {
     returnMany(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[]): Promise<Prod[]>;
     returnManyPaginated(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[], page?: number, pageSize?: number): Promise<{

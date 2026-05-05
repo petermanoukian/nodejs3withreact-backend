@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubcatStoreRequest = void 0;
-class SubcatStoreRequest {
+export class SubcatStoreRequest {
     static async validate(req, subcatService) {
         const errors = [];
         const catidRaw = req.body?.catid;
@@ -64,5 +61,4 @@ class SubcatStoreRequest {
         return errors.length > 0 ? { valid: false, errors } : { valid: true };
     }
 }
-exports.SubcatStoreRequest = SubcatStoreRequest;
 //# sourceMappingURL=SubcatStoreRequest.js.map

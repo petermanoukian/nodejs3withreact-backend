@@ -1,5 +1,5 @@
-import { User } from "../../../Model/Admin/User.model";
-import { UserInterface } from "../../Interface/Admin/UserInterface";
+import { User } from "@Model/Admin/User.model";
+import { UserInterface } from "@Repository/Interface/Admin/UserInterface";
 export declare class UserQuery implements UserInterface {
     findByEmail(email: string): Promise<User | null>;
     findByUsername(username: string): Promise<User | null>;

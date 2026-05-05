@@ -1,21 +1,15 @@
-"use strict";
 //src\app\http\Controllers\Api\Admin\SubcatController.ts
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubcatController = void 0;
-const SubcatService_1 = require("../../../../Service/Action/Admin/SubcatService");
-const ImageUploadService_1 = require("../../../../Service/Action/Common/ImageUploadService");
-const FileUploadService_1 = require("../../../../Service/Action/Common/FileUploadService");
-const SubcatStoreRequest_1 = require("../../../Request/Admin/SubcatStoreRequest");
-const SubcatUpdateRequest_1 = require("../../../Request/Admin/SubcatUpdateRequest");
-const SubcatQuery_1 = require("../../../../Repository/Queries/Admin/SubcatQuery");
-const knex_1 = __importDefault(require("knex"));
-const knexfile_1 = __importDefault(require("../../../../../config/knexfile"));
-const multer_1 = __importDefault(require("multer"));
-const upload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
-class SubcatController {
+import { SubcatService } from "@Service/Action/Admin/SubcatService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
+import { SubcatStoreRequest } from "@Http/Request/Admin/SubcatStoreRequest";
+import { SubcatUpdateRequest } from "@Http/Request/Admin/SubcatUpdateRequest";
+import { SubcatQuery } from "@Repository/Queries/Admin/SubcatQuery";
+import knex from "knex";
+import knexConfig from "@config/knexfile";
+import multer from "multer";
+const upload = multer({ storage: multer.memoryStorage() });
+export class SubcatController {
     subcatService;
     imageUploadService;
     fileUploadService;
@@ -23,7 +17,7 @@ class SubcatController {
         { name: "img", maxCount: 1 },
         { name: "filer", maxCount: 1 },
     ]);
-    static instance = new SubcatController(new SubcatService_1.SubcatService(new SubcatQuery_1.SubcatQuery((0, knex_1.default)(knexfile_1.default))), new ImageUploadService_1.ImageUploadService(), new FileUploadService_1.FileUploadService());
+    static instance = new SubcatController(new SubcatService(new SubcatQuery(knex(knexConfig))), new ImageUploadService(), new FileUploadService());
     constructor(subcatService, imageUploadService, fileUploadService) {
         this.subcatService = subcatService;
         this.imageUploadService = imageUploadService;
@@ -117,7 +111,7 @@ class SubcatController {
     }
     // ✅ Store new subcat (catid REQUIRED)
     async store(req, res) {
-        const validation = await SubcatStoreRequest_1.SubcatStoreRequest.validate(req, this.subcatService);
+        const validation = await SubcatStoreRequest.validate(req, this.subcatService);
         if (!validation.valid) {
             return res.status(400).json({ errors: validation.errors });
         }
@@ -148,7 +142,7 @@ class SubcatController {
     // ✅ Update subcat (with validation + uploads)
     async update(req, res) {
         const id = Number(req.params.id);
-        const validation = await SubcatUpdateRequest_1.SubcatUpdateRequest.validate(req, this.subcatService);
+        const validation = await SubcatUpdateRequest.validate(req, this.subcatService);
         if (!validation.valid) {
             return res.status(400).json({ errors: validation.errors });
         }
@@ -231,5 +225,4 @@ class SubcatController {
         }
     }
 }
-exports.SubcatController = SubcatController;
 //# sourceMappingURL=SubcatController.js.map

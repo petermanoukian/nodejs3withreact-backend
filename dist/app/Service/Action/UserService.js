@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
-const UserQuery_1 = require("../../Repository/Queries/Admin/UserQuery");
-class UserService {
+import { UserQuery } from "@RepositoryQueries/Admin/UserQuery";
+export class UserService {
     userRepo;
     constructor() {
-        this.userRepo = new UserQuery_1.UserQuery();
+        this.userRepo = new UserQuery();
     }
     async login(identifier, password) {
         const user = await this.userRepo.findByIdentifier(identifier);
@@ -31,5 +28,4 @@ class UserService {
         return bcrypt.compare(plain, hashed);
     }
 }
-exports.UserService = UserService;
 //# sourceMappingURL=UserService.js.map

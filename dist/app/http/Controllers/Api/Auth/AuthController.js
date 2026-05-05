@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthController = void 0;
-const UserService_1 = require("../../../../Service/Action/UserService");
-class AuthController {
+import { UserService } from "@ServiceAction/UserService";
+export class AuthController {
     userService;
     static instance = new AuthController();
     constructor() {
-        this.userService = new UserService_1.UserService();
+        this.userService = new UserService();
     }
     /**
      * Handle logout request
@@ -57,5 +54,4 @@ class AuthController {
         }
     }
 }
-exports.AuthController = AuthController;
 //# sourceMappingURL=AuthController.js.map

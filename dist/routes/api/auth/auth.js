@@ -1,12 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const AuthController_1 = require("../../../app/http/Controllers/Api/Auth/AuthController");
-const AuthTokenMiddleware_1 = require("../../../app/http/Middleware/Api/Auth/AuthTokenMiddleware");
-const router = (0, express_1.Router)();
-const authController = AuthController_1.AuthController.instance;
+import { Router } from "express";
+import { AuthController } from "@Http/Controllers/Api/Auth/AuthController";
+import { authTokenMiddleware } from "@HttpMiddleware/Api/Auth/AuthTokenMiddleware";
+const router = Router();
+const authController = AuthController.instance;
 // ✅ Apply middleware to all routes in this router
-router.use(AuthTokenMiddleware_1.authTokenMiddleware);
+router.use(authTokenMiddleware);
 /**
  * Check authentication status
  * GET /api/auth/check
@@ -24,5 +22,5 @@ router.post("/logout", (req, res) => authController.logout(req, res));
  */
 router.get("/loggeduser", (req, res) => authController.loggeduseinfo(req, res));
 router.post("/loggeduser", (req, res) => authController.loggeduseinfo(req, res));
-exports.default = router;
+export default router;
 //# sourceMappingURL=auth.js.map

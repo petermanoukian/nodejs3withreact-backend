@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProdQuery = void 0;
-const queryHelper_1 = require("../../Helpers/queryHelper");
-class ProdQuery {
+import { runQuery, runQueryOne, runQueryPaginated, runQueryReturning, runQueryDelete, runQueryPaginatedWithAlias } from "@Repository/Helpers/queryHelper";
+export class ProdQuery {
     db;
     constructor(db) {
         this.db = db;
@@ -13,23 +10,23 @@ class ProdQuery {
             query.where(key, value);
         });
         query.orderBy(orderByField, orderByDirection);
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnManyPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], page = 1, pageSize = 10) {
         let query = this.db("prod").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
-        return (0, queryHelper_1.runQueryPaginated)(query, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(query, page, pageSize, orderByField, orderByDirection);
     }
     async returnOne(filters = {}, relatedTables = [], fields = ["*"]) {
         let query = this.db("prod").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnOneById(id, relatedTables = [], fields = ["*"]) {
         const query = this.db("prod")
             .select(fields)
             .where("id", id);
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnSearchMany(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like") {
         let query = this.db("prod").select(fields);
@@ -50,7 +47,7 @@ class ProdQuery {
             });
         }
         query.orderBy(orderByField, orderByDirection);
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnSearchPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like", page = 1, pageSize = 10) {
         const baseQuery = this.db("prod").select(fields);
@@ -70,7 +67,7 @@ class ProdQuery {
                 });
             });
         }
-        return (0, queryHelper_1.runQueryPaginated)(baseQuery, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(baseQuery, page, pageSize, orderByField, orderByDirection);
     }
     async returnSearchPaginatedWithDetails(filters = {}, orderByField = "id", orderByDirection = "desc", searchFields = [], searchOperator = "AND", searchMode = "like", page = 1, pageSize = 10, search = "" // ✅ added search term
     ) {
@@ -103,7 +100,7 @@ class ProdQuery {
                 });
             });
         }
-        return (0, queryHelper_1.runQueryPaginatedWithAlias)(baseQuery, page, pageSize, `prod.${orderByField}`, orderByDirection, "prod.id");
+        return runQueryPaginatedWithAlias(baseQuery, page, pageSize, `prod.${orderByField}`, orderByDirection, "prod.id");
     }
     async returnSearchOne(filters = {}, relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like") {
         const query = this.db("prod").select(fields);
@@ -124,10 +121,10 @@ class ProdQuery {
             });
         }
         query.orderBy("id", "desc");
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async store(data) {
-        return await (0, queryHelper_1.runQueryReturning)(this.db("prod").insert(data));
+        return await runQueryReturning(this.db("prod").insert(data));
     }
     async update(id, data) {
         await this.db("prod")
@@ -142,11 +139,10 @@ class ProdQuery {
         return updated;
     }
     async delete(id, relatedTables = []) {
-        await (0, queryHelper_1.runQueryDelete)(this.db("prod").where("id", id));
+        await runQueryDelete(this.db("prod").where("id", id));
     }
     async deleteMany(ids, relatedTables = []) {
-        await (0, queryHelper_1.runQueryDelete)(this.db("prod").whereIn("id", ids));
+        await runQueryDelete(this.db("prod").whereIn("id", ids));
     }
 }
-exports.ProdQuery = ProdQuery;
 //# sourceMappingURL=ProdQuery.js.map

@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProdStoreRequest = void 0;
-class ProdStoreRequest {
+export class ProdStoreRequest {
     static async validate(req, prodService) {
         const errors = [];
         const { catid, subcatid, name, des, dess } = req.body;
@@ -65,5 +62,4 @@ class ProdStoreRequest {
         return errors.length > 0 ? { valid: false, errors } : { valid: true };
     }
 }
-exports.ProdStoreRequest = ProdStoreRequest;
 //# sourceMappingURL=ProdStoreRequest.js.map

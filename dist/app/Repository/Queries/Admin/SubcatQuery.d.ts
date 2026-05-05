@@ -1,7 +1,7 @@
 import { Knex } from "knex";
-import { Subcat } from "../../../Model/Admin/Subcat.model";
-import { SubcatInterface } from "../../Interface/Admin/SubcatInterface";
-import type { SubcatWithCounts } from "../../Interface/Admin/SubcatInterface";
+import { Subcat } from "@Model/Admin/Subcat.model";
+import { SubcatInterface } from "@Repository/Interface/Admin/SubcatInterface";
+import type { SubcatWithCounts } from "@Repository/Interface/Admin/SubcatInterface";
 export declare class SubcatQuery implements SubcatInterface {
     private db;
     constructor(db: Knex);

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { SubcatService } from "../../../../Service/Action/Admin/SubcatService";
-import { ImageUploadService } from "../../../../Service/Action/Common/ImageUploadService";
-import { FileUploadService } from "../../../../Service/Action/Common/FileUploadService";
+import { SubcatService } from "@Service/Action/Admin/SubcatService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
 export declare class SubcatController {
     private subcatService;
     private imageUploadService;

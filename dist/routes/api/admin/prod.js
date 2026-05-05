@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // src/routes/api/admin/prod.ts
-const express_1 = require("express");
-const ProdController_1 = require("../../../app/http/Controllers/Api/Admin/ProdController");
-const router = (0, express_1.Router)();
-const prodController = ProdController_1.ProdController.instance;
+import { Router } from "express";
+import { ProdController } from "@Http/Controllers/Api/Admin/ProdController";
+const router = Router();
+const prodController = ProdController.instance;
 // ✅ Explicit routes
 // List Prods (optionally scoped by catid + subcatid)
 // List Products (optionally scoped by catid/subcatid)
@@ -29,12 +27,12 @@ router.get("/edit/:id", (req, res) => prodController.edit(req, res));
 router.post("/check-name-add", (req, res) => prodController.checkNameExistsForAdd(req, res));
 router.post("/check-name-update", (req, res) => prodController.checkNameExistsForUpdate(req, res));
 // Store new prod (catid + subcatid REQUIRED)
-router.post("/store", ProdController_1.ProdController.uploadMiddleware, (req, res) => prodController.store(req, res));
+router.post("/store", ProdController.uploadMiddleware, (req, res) => prodController.store(req, res));
 // Update existing prod
-router.put("/update/:id", ProdController_1.ProdController.uploadMiddleware, (req, res) => prodController.update(req, res));
+router.put("/update/:id", ProdController.uploadMiddleware, (req, res) => prodController.update(req, res));
 // Delete single prod
 router.delete("/delete/:id", (req, res) => prodController.delete(req, res));
 // Delete many prods
 router.delete("/delete-many", (req, res) => prodController.deleteMany(req, res));
-exports.default = router;
+export default router;
 //# sourceMappingURL=prod.js.map

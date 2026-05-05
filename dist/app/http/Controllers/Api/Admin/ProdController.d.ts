@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ProdService } from "../../../../Service/Action/Admin/ProdService";
-import { ImageUploadService } from "../../../../Service/Action/Common/ImageUploadService";
-import { FileUploadService } from "../../../../Service/Action/Common/FileUploadService";
+import { ProdService } from "@Service/Action/Admin/ProdService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
 export declare class ProdController {
     private prodService;
     private imageUploadService;

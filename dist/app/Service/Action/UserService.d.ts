@@ -1,5 +1,5 @@
-import { User } from "../../Model/Admin/User.model";
-import { UserServiceInterface } from "../Interface/UserServiceInterface";
+import { User } from "@Model/Admin/User.model";
+import { UserServiceInterface } from "@ServiceInterface/UserServiceInterface";
 export declare class UserService implements UserServiceInterface {
     private userRepo;
     constructor();

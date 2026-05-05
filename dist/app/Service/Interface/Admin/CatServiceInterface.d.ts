@@ -1,4 +1,4 @@
-import { Cat, CatWithCounts } from "../../../Model/Admin/Cat.model";
+import { Cat, CatWithCounts } from "@Model/Admin/Cat.model";
 export interface CatServiceInterface {
     returnMany(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[]): Promise<Cat[]>;
     returnManyPaginated(filters?: Record<string, any>, orderByField?: string, orderByDirection?: "asc" | "desc", relatedTables?: string[], fields?: string[], page?: number, pageSize?: number): Promise<{

@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.config = void 0;
 // src/config/index.ts
-require("./env"); // must be first
-exports.config = {
+import "./env"; // must be first
+export const config = {
     port: Number(process.env.PORT) || 3000,
     db: {
         host: process.env.DB_HOST ?? "localhost",

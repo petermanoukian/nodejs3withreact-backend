@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubcatService = void 0;
-class SubcatService {
+export class SubcatService {
     repository;
     constructor(repository) {
         this.repository = repository;
@@ -43,5 +40,4 @@ class SubcatService {
         return this.repository.deleteMany(...args);
     }
 }
-exports.SubcatService = SubcatService;
 //# sourceMappingURL=SubcatService.js.map

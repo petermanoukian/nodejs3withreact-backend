@@ -2,11 +2,11 @@ import "./env";
 declare const _default: {
     client: string;
     connection: {
-        host: string;
-        port: number;
-        user: string;
-        password: string;
-        database: string;
+        host: any;
+        port: any;
+        user: any;
+        password: any;
+        database: any;
     };
     migrations: {
         directory: string;

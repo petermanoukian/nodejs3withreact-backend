@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { CatService } from "../../../../Service/Action/Admin/CatService";
-import { ImageUploadService } from "../../../../Service/Action/Common/ImageUploadService";
-import { FileUploadService } from "../../../../Service/Action/Common/FileUploadService";
+import { CatService } from "@Service/Action/Admin/CatService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
 export declare class CatController {
     private catService;
     private imageUploadService;

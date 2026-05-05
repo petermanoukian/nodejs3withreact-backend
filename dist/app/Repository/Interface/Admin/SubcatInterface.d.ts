@@ -1,4 +1,4 @@
-import { Subcat } from "../../../Model/Admin/Subcat.model";
+import { Subcat } from "@Model/Admin/Subcat.model";
 export interface SubcatWithCounts extends Subcat {
     prodCount: number;
     catName?: string;

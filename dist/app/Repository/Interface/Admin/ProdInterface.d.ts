@@ -1,4 +1,4 @@
-import { Prod } from "../../../Model/Admin/Prod.model";
+import { Prod } from "@Model/Admin/Prod.model";
 export interface ProdWithDetails extends Prod {
     catName?: string;
     subcatName?: string;

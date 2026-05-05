@@ -1,4 +1,4 @@
-import { User } from "../../Model/Admin/User.model";
+import { User } from "@Model/Admin/User.model";
 export interface UserServiceInterface {
     /**
      * Attempt login using either email or username.

@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SubcatQuery = void 0;
-const queryHelper_1 = require("../../Helpers/queryHelper");
-class SubcatQuery {
+import { runQuery, runQueryOne, runQueryPaginated, runQueryReturning, runQueryDelete } from "@Repository/Helpers/queryHelper";
+export class SubcatQuery {
     db;
     constructor(db) {
         this.db = db;
@@ -13,23 +10,23 @@ class SubcatQuery {
             query.where(key, value);
         });
         query.orderBy(orderByField, orderByDirection);
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnManyPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], page = 1, pageSize = 10) {
         let query = this.db("subcat").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
-        return (0, queryHelper_1.runQueryPaginated)(query, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(query, page, pageSize, orderByField, orderByDirection);
     }
     async returnOne(filters = {}, relatedTables = [], fields = ["*"]) {
         let query = this.db("subcat").select(fields);
         Object.entries(filters).forEach(([key, value]) => query.where(key, value));
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnOneById(id, relatedTables = [], fields = ["*"]) {
         const query = this.db("subcat")
             .select(fields)
             .where("id", id);
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async returnSearchMany(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like") {
         let query = this.db("subcat").select(fields);
@@ -50,7 +47,7 @@ class SubcatQuery {
             });
         }
         query.orderBy(orderByField, orderByDirection);
-        return (0, queryHelper_1.runQuery)(query);
+        return runQuery(query);
     }
     async returnSearchPaginated(filters = {}, orderByField = "id", orderByDirection = "desc", relatedTables = [], fields = ["*"], searchFields = [], searchOperator = "AND", searchMode = "like", page = 1, pageSize = 10) {
         const baseQuery = this.db("subcat").select(fields);
@@ -70,7 +67,7 @@ class SubcatQuery {
                 });
             });
         }
-        return (0, queryHelper_1.runQueryPaginated)(baseQuery, page, pageSize, orderByField, orderByDirection);
+        return runQueryPaginated(baseQuery, page, pageSize, orderByField, orderByDirection);
     }
     async returnSearchPaginatedWithCounts(filters = {}, orderByField = "id", orderByDirection = "desc", searchFields = [], searchOperator = "AND", searchMode = "like", page = 1, pageSize = 10) {
         console.log("FILTERS:", JSON.stringify(filters));
@@ -159,10 +156,10 @@ class SubcatQuery {
             });
         }
         query.orderBy("id", "desc");
-        return (0, queryHelper_1.runQueryOne)(query);
+        return runQueryOne(query);
     }
     async store(data) {
-        return await (0, queryHelper_1.runQueryReturning)(this.db("subcat").insert(data));
+        return await runQueryReturning(this.db("subcat").insert(data));
     }
     async update(id, data) {
         await this.db("subcat")
@@ -177,13 +174,12 @@ class SubcatQuery {
         return updated;
     }
     async delete(id, relatedTables = []) {
-        await (0, queryHelper_1.runQueryDelete)(this.db("prod").where("subcatid", id));
-        await (0, queryHelper_1.runQueryDelete)(this.db("subcat").where("id", id));
+        await runQueryDelete(this.db("prod").where("subcatid", id));
+        await runQueryDelete(this.db("subcat").where("id", id));
     }
     async deleteMany(ids, relatedTables = []) {
-        await (0, queryHelper_1.runQueryDelete)(this.db("prod").whereIn("subcatid", ids));
-        await (0, queryHelper_1.runQueryDelete)(this.db("subcat").whereIn("id", ids));
+        await runQueryDelete(this.db("prod").whereIn("subcatid", ids));
+        await runQueryDelete(this.db("subcat").whereIn("id", ids));
     }
 }
-exports.SubcatQuery = SubcatQuery;
 //# sourceMappingURL=SubcatQuery.js.map

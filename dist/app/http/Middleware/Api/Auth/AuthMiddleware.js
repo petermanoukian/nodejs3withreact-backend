@@ -1,10 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.authMiddleware = authMiddleware;
 /**
  * Middleware to enforce authentication
  */
-function authMiddleware(req, res, next) {
+export function authMiddleware(req, res, next) {
     if (req.session && req.session.userId) {
         // User is authenticated
         return next();

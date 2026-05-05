@@ -1,6 +1,6 @@
 import { Knex } from "knex";
-import { Cat, CatWithCounts } from "../../../Model/Admin/Cat.model";
-import { CatInterface } from "../../Interface/Admin/CatInterface";
+import { Cat, CatWithCounts } from "@Model/Admin/Cat.model";
+import { CatInterface } from "@Repository/Interface/Admin/CatInterface";
 export declare class CatQuery implements CatInterface {
     private db;
     constructor(db: Knex);

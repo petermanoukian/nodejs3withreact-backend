@@ -1,6 +1,6 @@
 import { Knex } from "knex";
-import { Prod } from "../../../Model/Admin/Prod.model";
-import { ProdInterface, ProdWithDetails } from "../../Interface/Admin/ProdInterface";
+import { Prod } from "@Model/Admin/Prod.model";
+import { ProdInterface, ProdWithDetails } from "@Repository/Interface/Admin/ProdInterface";
 export declare class ProdQuery implements ProdInterface {
     private db;
     constructor(db: Knex);

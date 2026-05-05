@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatUpdateRequest = void 0;
-class CatUpdateRequest {
+export class CatUpdateRequest {
     static async validate(req, catService) {
         const errors = [];
         const id = Number(req.params.id);
@@ -55,5 +52,4 @@ class CatUpdateRequest {
         return errors.length > 0 ? { valid: false, errors } : { valid: true };
     }
 }
-exports.CatUpdateRequest = CatUpdateRequest;
 //# sourceMappingURL=CatUpdateRequest.js.map

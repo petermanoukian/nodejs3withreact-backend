@@ -1,20 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatController = void 0;
-const CatService_1 = require("../../../../Service/Action/Admin/CatService");
-const ImageUploadService_1 = require("../../../../Service/Action/Common/ImageUploadService");
-const FileUploadService_1 = require("../../../../Service/Action/Common/FileUploadService");
-const CatStoreRequest_1 = require("../../../Request/Admin/CatStoreRequest");
-const CatUpdateRequest_1 = require("../../../Request/Admin/CatUpdateRequest");
-const CatQuery_1 = require("../../../../Repository/Queries/Admin/CatQuery");
-const knex_1 = __importDefault(require("knex"));
-const knexfile_1 = __importDefault(require("../../../../../config/knexfile"));
-const multer_1 = __importDefault(require("multer"));
-const upload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
-class CatController {
+import { CatService } from "@Service/Action/Admin/CatService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
+import { CatStoreRequest } from "@Http/Request/Admin/CatStoreRequest";
+import { CatUpdateRequest } from "@Http/Request/Admin/CatUpdateRequest";
+import { CatQuery } from "@Repository/Queries/Admin/CatQuery";
+import knex from "knex";
+import knexConfig from "@config/knexfile";
+import multer from "multer";
+const upload = multer({ storage: multer.memoryStorage() });
+export class CatController {
     catService;
     imageUploadService;
     fileUploadService;
@@ -22,7 +16,7 @@ class CatController {
         { name: "img", maxCount: 1 },
         { name: "filer", maxCount: 1 },
     ]);
-    static instance = new CatController(new CatService_1.CatService(new CatQuery_1.CatQuery((0, knex_1.default)(knexfile_1.default))), new ImageUploadService_1.ImageUploadService(), new FileUploadService_1.FileUploadService());
+    static instance = new CatController(new CatService(new CatQuery(knex(knexConfig))), new ImageUploadService(), new FileUploadService());
     constructor(catService, imageUploadService, fileUploadService) {
         this.catService = catService;
         this.imageUploadService = imageUploadService;
@@ -119,7 +113,7 @@ class CatController {
     async store(req, res) {
         try {
             const { name } = req.body;
-            const validation = await CatStoreRequest_1.CatStoreRequest.validate(req, this.catService);
+            const validation = await CatStoreRequest.validate(req, this.catService);
             if (!validation.valid) {
                 return res.status(400).json({ errors: validation.errors });
             }
@@ -157,7 +151,7 @@ class CatController {
         try {
             const id = Number(req.params.id);
             const { name } = req.body;
-            const validation = await CatUpdateRequest_1.CatUpdateRequest.validate(req, this.catService);
+            const validation = await CatUpdateRequest.validate(req, this.catService);
             if (!validation.valid) {
                 return res.status(400).json({ errors: validation.errors });
             }
@@ -208,5 +202,4 @@ class CatController {
         res.json({ message: "Cats deleted successfully" });
     }
 }
-exports.CatController = CatController;
 //# sourceMappingURL=CatController.js.map

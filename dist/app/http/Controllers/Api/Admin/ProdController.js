@@ -1,21 +1,15 @@
-"use strict";
 // src/app/http/Controllers/Api/Admin/ProdController.ts
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProdController = void 0;
-const ProdService_1 = require("../../../../Service/Action/Admin/ProdService");
-const ImageUploadService_1 = require("../../../../Service/Action/Common/ImageUploadService");
-const FileUploadService_1 = require("../../../../Service/Action/Common/FileUploadService");
-const ProdStoreRequest_1 = require("../../../Request/Admin/ProdStoreRequest");
-const ProdUpdateRequest_1 = require("../../../Request/Admin/ProdUpdateRequest");
-const ProdQuery_1 = require("../../../../Repository/Queries/Admin/ProdQuery");
-const knex_1 = __importDefault(require("knex"));
-const knexfile_1 = __importDefault(require("../../../../../config/knexfile"));
-const multer_1 = __importDefault(require("multer"));
-const upload = (0, multer_1.default)({ storage: multer_1.default.memoryStorage() });
-class ProdController {
+import { ProdService } from "@Service/Action/Admin/ProdService";
+import { ImageUploadService } from "@Service/Action/Common/ImageUploadService";
+import { FileUploadService } from "@Service/Action/Common/FileUploadService";
+import { ProdStoreRequest } from "@Http/Request/Admin/ProdStoreRequest";
+import { ProdUpdateRequest } from "@Http/Request/Admin/ProdUpdateRequest";
+import { ProdQuery } from "@Repository/Queries/Admin/ProdQuery";
+import knex from "knex";
+import knexConfig from "@config/knexfile";
+import multer from "multer";
+const upload = multer({ storage: multer.memoryStorage() });
+export class ProdController {
     prodService;
     imageUploadService;
     fileUploadService;
@@ -23,7 +17,7 @@ class ProdController {
         { name: "img", maxCount: 1 },
         { name: "filer", maxCount: 1 },
     ]);
-    static instance = new ProdController(new ProdService_1.ProdService(new ProdQuery_1.ProdQuery((0, knex_1.default)(knexfile_1.default))), new ImageUploadService_1.ImageUploadService(), new FileUploadService_1.FileUploadService());
+    static instance = new ProdController(new ProdService(new ProdQuery(knex(knexConfig))), new ImageUploadService(), new FileUploadService());
     constructor(prodService, imageUploadService, fileUploadService) {
         this.prodService = prodService;
         this.imageUploadService = imageUploadService;
@@ -130,7 +124,7 @@ class ProdController {
     }
     // ✅ Store new prod
     async store(req, res) {
-        const validation = await ProdStoreRequest_1.ProdStoreRequest.validate(req, this.prodService);
+        const validation = await ProdStoreRequest.validate(req, this.prodService);
         if (!validation.valid) {
             return res.status(400).json({ errors: validation.errors });
         }
@@ -161,7 +155,7 @@ class ProdController {
     // ✅ Update prod
     async update(req, res) {
         const id = Number(req.params.id);
-        const validation = await ProdUpdateRequest_1.ProdUpdateRequest.validate(req, this.prodService);
+        const validation = await ProdUpdateRequest.validate(req, this.prodService);
         if (!validation.valid) {
             return res.status(400).json({ errors: validation.errors });
         }
@@ -218,5 +212,4 @@ class ProdController {
         }
     }
 }
-exports.ProdController = ProdController;
 //# sourceMappingURL=ProdController.js.map

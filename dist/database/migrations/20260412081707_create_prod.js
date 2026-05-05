@@ -1,8 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.up = up;
-exports.down = down;
-async function up(knex) {
+export async function up(knex) {
     await knex.schema.createTable("prod", (table) => {
         table.increments("id").primary(); // auto-increment PK
         table
@@ -30,7 +26,7 @@ async function up(knex) {
         table.unique(["catid", "subcatid", "name"]);
     });
 }
-async function down(knex) {
+export async function down(knex) {
     await knex.schema.dropTableIfExists("prod");
 }
 //# sourceMappingURL=20260412081707_create_prod.js.map

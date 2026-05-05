@@ -1,4 +1,4 @@
-import { Cat, CatWithCounts } from "../../../Model/Admin/Cat.model";
+import { Cat, CatWithCounts } from "@Model/Admin/Cat.model";
 export interface CatInterface {
     /**
      * Return many rows

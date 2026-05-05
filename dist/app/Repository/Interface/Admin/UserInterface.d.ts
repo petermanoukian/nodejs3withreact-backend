@@ -1,4 +1,4 @@
-import { User } from "../../../Model/Admin/User.model";
+import { User } from "@Model/Admin/User.model";
 export interface UserInterface {
     /**
      * Find a user by email (used for login).
